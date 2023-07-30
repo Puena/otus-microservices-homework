@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -19,7 +20,8 @@ func (a *App) Run() error {
 	serverMux := http.NewServeMux()
 	serverMux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		log.Println("healthy", r.URL.Path, r.Method, r.RemoteAddr, r.UserAgent())
-		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]string{"status": "OK"})
 	})
 	return http.ListenAndServe(":"+a.Port, serverMux)
 }
