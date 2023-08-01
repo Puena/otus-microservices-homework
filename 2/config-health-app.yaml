@@ -1,6 +1,4 @@
-apiVersion: v1
+apiVersion: configs/v1
 kind: ConfigMap
 metadata:
   name: health-app-config
-data:
-  HEALTH_APP_CONTAINER_PORT: "8000"

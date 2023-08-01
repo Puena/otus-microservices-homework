@@ -5,7 +5,7 @@ metadata:
   labels:
     app: health-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: health-app
@@ -16,29 +16,26 @@ spec:
     spec:
       containers:
       - name: health-app
-        image: caligar/health-app:0.0.1
+        image: caligar/health-app:0.0.2
         env:
-          - name: PORT
-            valueFrom:
-              configMapKeyRef:
-                name: health-app-config
-                key: HEALTH_APP_CONTAINER_PORT
+        - name: PORT
+          value: "8000"
         livenessProbe:
           httpGet:
             path: /health
-            port: PORT
+            port: 8000
           failureThreshold: 1
           initialDelaySeconds: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /health
-            port: PORT
+            port: 8000
           initialDelaySeconds: 10
         startupProbe:
           httpGet:
             path: /health
-            port: PORT
+            port: 8000
           failureThreshold: 10
           initialDelaySeconds: 10
           periodSeconds: 10
@@ -55,5 +52,5 @@ spec:
     app.kubernetes.io/name: health-app
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: PORT
+      port: 8030
+      targetPort: 8000
