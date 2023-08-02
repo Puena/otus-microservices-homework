@@ -1,0 +1,4 @@
+apiVersion: configs/v1
+kind: ConfigMap
+metadata:
+  name: health-app-config

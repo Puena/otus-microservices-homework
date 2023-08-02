@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "2039207a-a4fb-45a2-b29f-1745deb915ea",
+		"name": "HM_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19313656"
+	},
+	"item": [
+		{
+			"name": "UserNameHealth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/aeugene/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"aeugene",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SimpleHealth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

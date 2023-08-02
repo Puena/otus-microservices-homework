@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-app-deployment
+  labels:
+    app: health-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: health-app
+  template:
+    metadata:
+      labels:
+        app: health-app
+    spec:
+      containers:
+      - name: health-app
+        image: caligar/health-app:0.0.2
+        env:
+        - name: PORT
+          value: "8000"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          failureThreshold: 1
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 10
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          failureThreshold: 10
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: health-app
+  ports:
+    - protocol: TCP
+      port: 8030
+      targetPort: 8000
