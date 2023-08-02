@@ -5,7 +5,7 @@ metadata:
   labels:
     app: health-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: health-app
@@ -47,9 +47,9 @@ kind: Service
 metadata:
   name: health-app-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
-    app.kubernetes.io/name: health-app
+    app: health-app
   ports:
     - protocol: TCP
       port: 8030
